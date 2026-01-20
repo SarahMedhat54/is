@@ -16,10 +16,8 @@ class Onboarding extends StatefulWidget {
 
 class _OnboardingState extends State<Onboarding> {
   final PageController controller = PageController();
-
-  // final int index = 0;
-
   bool isLast = false;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +29,12 @@ class _OnboardingState extends State<Onboarding> {
             Image.asset("assets/images/Group 31 (1).png"),
             Expanded(
               child: PageView.builder(
-                //physics: BouncingScrollPhysics(),
                 controller: controller,
                 itemCount: intro.length,
                 onPageChanged: (index) {
                   setState(() {
+                    currentIndex = index;
                     isLast = index == intro.length - 1;
-                    //this.currentIndex
                   });
                 },
                 itemBuilder: (context, index) {
@@ -63,70 +60,67 @@ class _OnboardingState extends State<Onboarding> {
                           textAlign: TextAlign.center,
                           style: AppStyles.goldBold20,
                         ),
-                        // SizedBox(height: 40),
-                        Spacer(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            index == 0
-                                ? SizedBox(width: 80)
-                                : TextButton(
-                                    onPressed: () {
-                                      controller.previousPage(
-                                        duration: Duration(milliseconds: 300),
-                                        curve: Curves.easeInOut,
-                                      );
-                                    },
-                                    child: Text(
-                                      "Back",
-                                      style: AppStyles.goldBold20,
-                                    ),
-                                  ),
-                            Spacer(),
-                            Row(
-                              children: [
-                                SmoothPageIndicator(
-                                  controller: controller,
-                                  effect: ExpandingDotsEffect(
-                                    dotColor: Colors.grey,
-                                    activeDotColor: AppColors.gold,
-                                    dotHeight: 10,
-                                    expansionFactor: 4,
-                                    dotWidth: 10,
-                                    spacing: 5,
-                                  ),
-                                  count: intro.length,
-                                ),
-                              ],
-                            ),
-                            Spacer(),
-                            TextButton(
-                              onPressed: () async {
-                                if (isLast) {
-                                  final SharedPreferences pref =
-                                      await SharedPreferences.getInstance();
-                                  await pref.setBool('done', true);
-                                  if (context.mounted) {
-                                    Navigator.pushReplacementNamed(
-                                      context,
-                                      '/login',
-                                    );
-                                  }
-                                } else {
-                                  controller.nextPage(
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                  );
-                                }
-                              },
-                              child: Text("Next", style: AppStyles.goldBold20),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   );
                 },
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: Row(
+                children: [
+                  Visibility(
+                      visible: currentIndex != 0,
+                      maintainSize: true,
+                      maintainAnimation: true,
+                      maintainState: true,
+                      child: TextButton(onPressed: () {
+                        controller.previousPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      }, child: Text(
+                        "Back",
+                        style: AppStyles.goldBold20,
+                      ),)),
+                  Spacer(),
+                  SmoothPageIndicator(
+                    controller: controller,
+                    effect: ExpandingDotsEffect(
+                      dotColor: Colors.grey,
+                      activeDotColor: AppColors.gold,
+                      dotHeight: 10,
+                      expansionFactor: 4,
+                      dotWidth: 10,
+                      spacing: 5,
+                    ),
+                    count: intro.length,
+                  ),
+                  Spacer(),
+                  TextButton(
+                    onPressed: () async {
+                      if (isLast) {
+                        final SharedPreferences pref =
+                        await SharedPreferences.getInstance();
+                        await pref.setBool('done', true);
+                        if (context.mounted) {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            'main',
+                          );
+                        }
+                      } else {
+                        controller.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    },
+                    child: Text(isLast ? "Finish" :"Next", style: AppStyles.goldBold20),
+                  ),
+                ],
               ),
             ),
           ],

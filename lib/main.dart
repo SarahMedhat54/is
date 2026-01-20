@@ -20,11 +20,10 @@ class MyApp extends StatelessWidget {
       // theme: ThemeData(canvasColor: AppColors.gold),
       routes: {
         Splash.routeName: (_) => Splash(),
+        Onboarding.routeName:(_)=> Onboarding(),
         Main.routeName: (_) => Main(),
         SuraDetails.routeName: (_) => SuraDetails(),
         HadethDetails.routeName: (_) => HadethDetails(),
-        Onboarding.routeName:(_)=> Onboarding(),
-
       },
       initialRoute: Splash.routeName,
     );
