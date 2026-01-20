@@ -15,15 +15,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Onboarding(),
+      debugShowCheckedModeBanner: false,
+      //home: Onboarding(),
       // theme: ThemeData(canvasColor: AppColors.gold),
-      // routes: {
-      //   Splash.routeName: (_) => Splash(),
-      //   Main.routeName: (_) => Main(),
-      //   SuraDetails.routeName: (_) => SuraDetails(),
-      //   HadethDetails.routeName: (_) => HadethDetails()
-      // },
-      // initialRoute: Splash.routeName,
+      routes: {
+        Splash.routeName: (_) => Splash(),
+        Main.routeName: (_) => Main(),
+        SuraDetails.routeName: (_) => SuraDetails(),
+        HadethDetails.routeName: (_) => HadethDetails(),
+        Onboarding.routeName:(_)=> Onboarding(),
+
+      },
+      initialRoute: Splash.routeName,
     );
   }
 }
