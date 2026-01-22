@@ -116,5 +116,8 @@ List<SuraDM> suras = [
   SuraDM(suraIndex: "113", nameAr: "الفلق", nameEn: "Al-Falaq", verses: "5"),
   SuraDM(suraIndex: "114", nameAr: "الناس", nameEn: "An-Nas", verses: "6"),
 ];
+abstract class Constants {
+  static const  String onboarding= "onboarding";
+}
 
 
