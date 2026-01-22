@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami/ui/screens/main/tabs/ahadeth/ahadeth.dart';
 import 'package:islami/ui/screens/main/tabs/quran/quran.dart';
+import 'package:islami/ui/screens/sebha/sebha.dart';
 import 'package:islami/ui/utils/app_assets.dart';
 import 'package:islami/ui/utils/app_colors.dart';
 
@@ -17,7 +18,8 @@ class _MainState extends State<Main> {
   List<Widget> tabs = [
     Quran(),
     Ahadeth(),
-    Container(color: Colors.yellow,),
+    Sebha(),
+    //Container(color: Colors.yellow,),
     Container(color: Colors.black,),
     Container(color: Colors.blue,)
   ];

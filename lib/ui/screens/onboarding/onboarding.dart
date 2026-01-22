@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami/ui/utils/app_colors.dart';
 import 'package:islami/ui/utils/app_styles.dart';
+import 'package:islami/ui/utils/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../data/data.dart';
@@ -104,7 +105,7 @@ class _OnboardingState extends State<Onboarding> {
                       if (isLast) {
                         final SharedPreferences pref =
                         await SharedPreferences.getInstance();
-                        await pref.setBool('done', true);
+                        await pref.setBool(Constants.onboarding, true);
                         if (context.mounted) {
                           Navigator.pushReplacementNamed(
                             context,
